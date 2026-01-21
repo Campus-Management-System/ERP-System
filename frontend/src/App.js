@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Login';
 import StudentDashboard from './pages/StudentDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import authService from './services/authService';
 import './App.css';
 
@@ -72,10 +73,7 @@ function App() {
                         path="/admin/dashboard"
                         element={
                             <ProtectedRoute allowedRoles={['admin']}>
-                                <div className="coming-soon">
-                                    <h1>Admin Dashboard</h1>
-                                    <p>Coming Soon - Person B Module</p>
-                                </div>
+                                <AdminDashboard />
                             </ProtectedRoute>
                         }
                     />
