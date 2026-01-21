@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Login';
 import StudentDashboard from './pages/StudentDashboard';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminPanel from './pages/AdminPanel';
 import authService from './services/authService';
 import './App.css';
 
@@ -73,7 +73,7 @@ function App() {
                         path="/admin/dashboard"
                         element={
                             <ProtectedRoute allowedRoles={['admin']}>
-                                <AdminDashboard />
+                                <AdminPanel />
                             </ProtectedRoute>
                         }
                     />
