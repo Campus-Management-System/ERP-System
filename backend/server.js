@@ -1,7 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv");
 
 // Load environment variables
 dotenv.config();
@@ -15,44 +15,53 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('✅ MongoDB Connected Successfully'))
-.catch((err) => console.error('❌ MongoDB Connection Error:', err));
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // Import routes - Person A Modules
-const authRoutes = require('./modules/auth/routes');
-const studentRoutes = require('./modules/students/routes');
-const attendanceRoutes = require('./modules/attendance/routes');
+const authRoutes = require("./modules/auth/routes");
+const studentRoutes = require("./modules/students/routes");
+const attendanceRoutes = require("./modules/attendance/routes");
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/students', studentRoutes);
-app.use('/api/attendance', attendanceRoutes);
+//Import routes - Person B Modules
+const facultyRoutes = require("./modules/faculty/routes");
+const marksRoutes = require("./modules/marks/routes");
+
+// API Routes - Person A
+app.use("/api/auth", authRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/attendance", attendanceRoutes);
+
+// API Routes - Person B
+app.use("/api/faculty", facultyRoutes);
+app.use("/api/marks", marksRoutes);
 
 // Health check route
-app.get('/api/health', (req, res) => {
+app.get("/api/health", (req, res) => {
   res.json({
     success: true,
-    message: 'Server is running',
-    timestamp: new Date().toISOString()
+    message: "Server is running",
+    timestamp: new Date().toISOString(),
   });
 });
 
 // Root route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: 'Smart Campus Management System API',
-    developer: 'Swastik Bhardwaj (Person A)',
+    message: "Smart Campus Management System API",
+    developer: "Swastik Bhardwaj (Person A)",
     modules: [
-      'Authentication & Authorization',
-      'Student Management',
-      'Attendance Management',
-      'Student Dashboard'
-    ]
+      "Authentication & Authorization",
+      "Student Management",
+      "Attendance Management",
+      "Student Dashboard",
+    ],
   });
 });
 
@@ -61,8 +70,8 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).json({
     success: false,
-    message: err.message || 'Internal Server Error',
-    error: process.env.NODE_ENV === 'development' ? err : {}
+    message: err.message || "Internal Server Error",
+    error: process.env.NODE_ENV === "development" ? err : {},
   });
 });
 
@@ -70,7 +79,7 @@ app.use((err, req, res, next) => {
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: 'Route not found'
+    message: "Route not found",
   });
 });
 

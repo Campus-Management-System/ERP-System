@@ -1,0 +1,381 @@
+/* FACULTY DASHBOARD STYLES - GRID FIX ENFORCED */
+
+* {
+    box-sizing: border-box; /* Crucial for Grid/Flex layouts */
+}
+
+.faculty-panel {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 1. SIDEBAR */
+.faculty-sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 32px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 32px;
+    color: #60a5fa;
+}
+
+.sidebar-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 24px 16px;
+    overflow-y: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(4px);
+}
+
+.nav-item.active {
+    background: rgba(96, 165, 250, 0.2);
+    color: white;
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: white;
+}
+
+.user-role {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.logout-btn-sidebar {
+    width: 100%;
+    padding: 12px;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+    color: #fca5a5;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn-sidebar:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: white;
+}
+
+/* 2. MAIN CONTENT AREA */
+.faculty-main {
+    margin-left: 280px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: calc(100% - 280px); /* Explicit width calculation */
+}
+
+/* 3. TOP BAR */
+.faculty-topbar {
+    background: white;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.faculty-topbar h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    color: #64748b;
+    font-size: 18px;
+}
+
+.badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ef4444;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* 4. DASHBOARD CONTENT */
+.dashboard-content {
+    padding: 32px;
+    width: 100%; /* FORCE FULL WIDTH */
+    max-width: 1600px; /* Prevent overly stretched content on huge screens */
+    margin: 0 auto;
+}
+
+/* --- GRID LAYOUT FIX --- */
+.stats-grid {
+    display: grid;
+    /* This tells the browser: Fit as many 240px columns as possible. If space remains, stretch them (1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 24px;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%; /* Match height of neighbors */
+}
+
+/* Color Bars */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+.stat-card.blue::before { background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%); }
+.stat-card.purple::before { background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%); }
+.stat-card.green::before { background: linear-gradient(90deg, #10b981 0%, #059669 100%); }
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    flex-shrink: 0;
+}
+.stat-card.blue .stat-icon { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+.stat-card.purple .stat-icon { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+.stat-card.green .stat-icon { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+
+.stat-details h3 {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 6px 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    line-height: 1;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 24px 0;
+}
+
+/* Subjects Card */
+.subject-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid #3b82f6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.subject-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.subject-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.subject-code {
+    background: #eff6ff;
+    color: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.subject-details {
+    display: flex;
+    gap: 12px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Loading */
+.loading-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f7fa;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+    .faculty-sidebar { width: 240px; }
+    .faculty-main { margin-left: 240px; width: calc(100% - 240px); }
+}
+
+@media (max-width: 768px) {
+    .faculty-sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+    .faculty-main { margin-left: 0; width: 100%; }
+    .stats-grid { grid-template-columns: 1fr; } /* Stack only on mobile */
+}
